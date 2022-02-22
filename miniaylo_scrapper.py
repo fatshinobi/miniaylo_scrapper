@@ -19,7 +19,7 @@ driver = webdriver.Chrome(service=serv, options=chrome_options)
 url = 'https://miniaylo.finance.ua/'
 
 driver.get(url)
-time.sleep(20)
+time.sleep(15)
 #actions = driver.find_elements_by_class_name('added')
 
 phone_btns = driver.find_elements(By.XPATH, "//div[@class='phone']/span")
@@ -37,17 +37,46 @@ for action in actions:
     hover.perform()
     
     action_number_string = action.get_attribute('title')
+    action_number_parts = action_number_string.split(' ')
+    action_number_string = action_number_parts[2] if len(action_number_parts) > 2 else ''
 
-    action_str = '[ '
-    action_str += action_number_string
+    #action_str = '[ '
+    #action_str += action_number_string
     elements = action.find_elements(By.TAG_NAME, 'td')
-    for element in elements:
-      action_str += f' : {element.text}'
+    
+    if len(elements) < 2: continue 
+
+    time_str = elements[0].text
+    type_str = elements[1].text
+    amount_elem = elements[2]
+    amount_childrn = amount_elem.find_elements(By.XPATH, ".//b")
+    currency_childrn = amount_elem.find_elements(By.XPATH, ".//span")
+    amount_str = amount_childrn[0].text
+    currency_str = currency_childrn[0].text
+
+    rate_elem = elements[3]
+    rate_childrn = rate_elem.find_elements(By.XPATH, ".//b")
+    rate_str = rate_childrn[0].text
+
+    phone_city_note_elem = elements[5]
+    phone_elem = phone_city_note_elem.find_elements(By.XPATH, ".//div[@class='group']/div[@class='phone']")
+    city_elem = phone_city_note_elem.find_elements(By.XPATH, ".//div[@class='group']/div[@class='city']")
+    note_elem = phone_city_note_elem.find_elements(By.XPATH, ".//div[@class='comment']")
+    
+
+    phone_str = phone_elem[0].text
+    city_str = city_elem[0].text
+    note_str = note_elem[0].text
+
+    print(f'[ {action_number_string} : {type_str} : {time_str} : {amount_str} : {currency_str} : {rate_str} : {phone_str} : {city_str} : {note_str} ]')
+
+    #for element in elements:
+    #    action_str += f' : {element.text}'
 
     #for element in action.find_elements(By.TAG_NAME, 'td'):
     #    
 
-    print(f'{action_str} ]')
+    #print(f'{action_str} ]')
     #print(action.text)
 
 #pdb.set_trace()
