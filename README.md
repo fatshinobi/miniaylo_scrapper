@@ -6,7 +6,6 @@ Web scraper for currency exchange site with Selenium
   * Selenium
 
 ## Usage
-To add a file to db:
 ```bash
 $ python3.10 miniaylo_scrapper.py
 [ 4392732 : ПРОДАМ : 08:28 : 45 777 : USD : 35.30 : +380 (99) 761-2440 : Київ : 🟡⚫️❗️ШУЛЯВСЬКА❗️🟡⚫️ГОЛОСІЄВО❗️🟡⚫️ ДРУЖБИ НАРОДІВ ❗️🟡⚫️ЧАБАНИ ❗️🟡⚫️ГАТНЕ❗️✔️💱 ОБМІННИЙ ПУНКТ ✔️парковка 🚘✔️кімната перерахунку 🔶💰 ♻️ ПРИЙМАЄМО ПОШКОДЖЕНІ КУПЮРИ ♻️💸 📲 Аліна ]
